@@ -1,6 +1,7 @@
 CXX=g++
 RM=rm -f
-CPPFLAGS=-Wall -c -I includes
+INCLUDES=~/rpi_slam/includes
+CPPFLAGS=-Wall -c -I $(INCLUDES)
 LDLIBS=-lwiringPi
 
 SRCS=src/*.cpp
