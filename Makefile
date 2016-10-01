@@ -11,18 +11,18 @@ all: rpi_slam
 rpi_slam: $(OBJS)
 
 rpi_slam: $(OBJS)
-    $(CXX) $(LDFLAGS) -o rpi_slam $(OBJS) $(LDLIBS)
+	$(CXX) $(LDFLAGS) -o rpi_slam $(OBJS) $(LDLIBS)
 
 depend: .depend
 
 .depend: $(SRCS)
-    rm -f ./.depend
-    $(CXX) $(CPPFLAGS) -MM $^>>./.depend;
+	rm -f ./.depend
+	$(CXX) $(CPPFLAGS) -MM $^>>./.depend;
 
 clean:
-    $(RM) $(OBJS)
+	$(RM) $(OBJS)
 
 dist-clean: clean
-    $(RM) *~ .depend
+	$(RM) *~ .depend
 
 include .depend
