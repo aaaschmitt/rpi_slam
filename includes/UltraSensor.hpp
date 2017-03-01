@@ -23,7 +23,11 @@ struct SensorData {
 // of point pairs (angle, distance)
 class UltraSensor {
 public:
-    UltraSensor(char *iname, ConcurrentQueue<SensorData> *Q);
+    UltraSensor(std::string interface_name, ConcurrentQueue<SensorData>& Queue) :
+        iname(interface_name), Q(Queue) {};
+    
+    // Destructor to clean up any threads associated with this sensor
+    ~UltraSensor();
     
     // start collecting data, spawns a new thread
     void start();
@@ -32,9 +36,9 @@ public:
     
 private:
     // We add values to the end of this Queue
-    ConcurrentQueue<SensorData> *Q;
+    ConcurrentQueue<SensorData>& Q;
     // Name of the serial interface to collect data from
-    char *iname;
+    std::string iname;
     // returns the fd on the serial port or -1 on error
     int setup();
     int serialPort;

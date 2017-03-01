@@ -9,10 +9,3 @@
 #ifndef main_hpp
 #define main_hpp
 #endif /* main_hpp */
-
-// Functions for setting up pin outputs and such
-int setup();
-int setupPins();
-
-// Runtime functions
-int run();

@@ -9,14 +9,12 @@
 #include "UltraSensor.hpp"
 #include "Exceptions.hpp"
 #include <cstring>
+#include <wiringPi.h>
+#include <wiringSerial.h>
 
-UltraSensor::UltraSensor(char *iname, ConcurrentQueue<SensorData> *Q)
-	: iname(iname)
-	, Q(Q)
-{};
+using std::string;
 
 int UltraSensor::setup() {
-    wiringPiSetup();
     return serialOpen(iname, DEFAULT_BAUD);
 }
 
