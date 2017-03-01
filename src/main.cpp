@@ -13,7 +13,6 @@
 #include <stdio.h>
 #include <sstream>
 #include <cstdlib>
-#include <wiringPi.h>
 
 using std::cout;
 

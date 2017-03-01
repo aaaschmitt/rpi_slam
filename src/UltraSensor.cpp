@@ -7,30 +7,34 @@
 //
 
 #include "UltraSensor.hpp"
-#include <wiringPi.h>
+#include "Exceptions.hpp"
+#include <cstring>
 
-UltraSensor::UltraSensor(int triggerPin, int echoPin, ConcurrentQueue<SensorData> buffer) :
-    buf(buffer),
-    theta(0)
-{
-    UltraSensor::INSTANCE = this;
-    UltraSensor::TPIN = triggerPin;
-    UltraSensor::EPIN = echoPin;
-    UltraSensor::startTime = time(NULL);
-};
+UltraSensor::UltraSensor(char *iname, ConcurrentQueue<SensorData> *Q)
+	: iname(iname)
+	, Q(Q)
+{};
 
-void UltraSensor::obtainDistanceData()
-{
-    digitalWrite(tpin, LOW);
-    delayMicroseconds(2);
-    digitalWrite(tpin, HIGH);
-    delayMicroseconds(10);
-    digitalWrite(tpin, LOW);
-    wiringPiISR(epin, INT_EDGE_RISING, &this->receivePulseHigh);
+int UltraSensor::setup() {
+    wiringPiSetup();
+    return serialOpen(iname, DEFAULT_BAUD);
 }
 
-void UltraSensor::receivePulseHigh()
-{
-    time(&UltraSensor::startTime);
-    wiringPiISR(UltraSensor::epin, INT_EDGE_FALLING, &receivePulseLow);
+void UltraSensor::start() {
+    this->running = true;
+    int fd = setup();
+    if (!(fd > 0)) {
+        char msg[100] = "Could not initialize serial port with iname: ";
+        throw setupException(strcat(msg, iname));
+    }
+    this->serialPort = fd;
+    
+    // should spawn new thread here
+    char *newData;
+    SensorData *parsedData;
+    while(isRunning()) {
+        newData = readSerial();
+        parsedData = parseData(newData);
+        sendToQueue(parsedData);
+    }
 }

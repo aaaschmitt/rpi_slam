@@ -1,8 +1,8 @@
 CXX=g++
 RM=rm -f
-INCLUDES=~/rpi_slam/includes
+INCLUDES=includes/
 CPPFLAGS=-Wall -c -I $(INCLUDES)
-LDLIBS=-lwiringPi
+LDLIBS=-I $(INCLUDES)
 
 SRCS=src/*.cpp
 OBJS=$(subst .cc,.o,$(SRCS))
