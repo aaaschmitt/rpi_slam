@@ -1,3 +1,7 @@
 .DS_Store
 .depend
 arduino/Release/
+.cproject
+.settings/
+.project
+.ino.cpp
