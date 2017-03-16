@@ -1,4 +1,4 @@
-CXX=g++-5 -std=c++14
+CXX=g++-6
 RM=rm -f
 INCLUDES=includes/ -lwiringpi
 CPPFLAGS=-Wall -c -I $(INCLUDES)
