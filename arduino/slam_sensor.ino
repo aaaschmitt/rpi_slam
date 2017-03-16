@@ -22,12 +22,12 @@ void setup()
 	Serial.begin(9600);
 	setupServo();
 	setupI2C();
+	Serial.println("Starting...");
 }
 
 void loop()
 {
 	// The main loop is in sendDisanceData
-	Serial.print("Stuff is not here anymore");
 }
 
 void setupServo() {
@@ -47,6 +47,7 @@ void receiveData(int byteCount){
 	if (byteCount) {
 		while(Wire.available()) {
 			sendData = Wire.read();
+			Serial.println("Got data!");
 		}
 	}
 }

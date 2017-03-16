@@ -7,7 +7,6 @@
 //
 
 #include <memory>
-#include "ConcurrentQueue.hpp"
 
 typedef std::mutex lock;
 typedef std::lock_guard<lock> guard;

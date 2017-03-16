@@ -69,4 +69,4 @@ private:
     ConcurrentQueue(const ConcurrentQueue& q);
 };
 
-#include ConcurrentQueue.cpp // inlcude the template implementation here so the linker can find it
+#include "ConcurrentQueue.tpp" // inlcude the template implementation here so the linker can find it

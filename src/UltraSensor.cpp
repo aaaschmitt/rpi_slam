@@ -12,27 +12,27 @@
 #include <wiringPi.h>
 #include <wiringSerial.h>
 
-using std::string;
+// using std::string;
 
-int UltraSensor::setup() {
-    return serialOpen(iname, DEFAULT_BAUD);
-}
+// int UltraSensor::setup() {
+//     return serialOpen(iname, DEFAULT_BAUD);
+// }
 
-void UltraSensor::start() {
-    this->running = true;
-    int fd = setup();
-    if (!(fd > 0)) {
-        char msg[100] = "Could not initialize serial port with iname: ";
-        throw setupException(strcat(msg, iname));
-    }
-    this->serialPort = fd;
+// void UltraSensor::start() {
+//     this->running = true;
+//     int fd = setup();
+//     if (!(fd > 0)) {
+//         char msg[100] = "Could not initialize serial port with iname: ";
+//         throw setupException(strcat(msg, iname));
+//     }
+//     this->serialPort = fd;
     
-    // should spawn new thread here
-    char *newData;
-    SensorData *parsedData;
-    while(isRunning()) {
-        newData = readSerial();
-        parsedData = parseData(newData);
-        sendToQueue(parsedData);
-    }
-}
+//     // should spawn new thread here
+//     char *newData;
+//     SensorData *parsedData;
+//     while(isRunning()) {
+//         newData = readSerial();
+//         parsedData = parseData(newData);
+//         sendToQueue(parsedData);
+//     }
+// }

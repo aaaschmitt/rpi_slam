@@ -14,32 +14,13 @@
 #include <sstream>
 #include <cstdlib>
 #include <wiringPi.h>
+#include <wiringPiI2C.h>
 
 using std::cout;
 
 int main (int argc, char *argv[]) {
-    if (argc > 1) {
-        std::stringstream convert(argv[1]);
-        if (!(convert >> LOG_LEVEL))
-            cout << "ERROR: invalid log level specified, using default";
+    int fd = wiringPiI2CSetup(0x04);
+    for (int i = 0; i < 5; i++) {
+        wiringPiI2CWrite(fd, i);
     }
-    
-    if (!setup()) {
-        cout << "ERROR: could not complete setup";
-        exit(1);
-    }
-    return run();
-}
-
-int setup() {
-    return setupPins();
-}
-
-int setupPins() {
-    wiringPiSetup();
-    return 0;
-}
-
-int run() {
-    
 }

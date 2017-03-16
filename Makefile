@@ -1,9 +1,16 @@
-COMPILER=/Volumes/xtools/armv8-rpi3-linux-gnueabihf/bin/armv8-rpi3-linux-gnueabihf-g++
+OS := $(shell uname)
+ifeq ($(OS), Darwin)
+	COMPILER=/Volumes/xtools/armv8-rpi3-linux-gnueabihf/bin/armv8-rpi3-linux-gnueabihf-g++
+	INCLUDES=includes/
+else
+	COMPILER=g++-6
+	INCLUDES=includes/ -lwiringpi
+endif
+
 CXX=$(COMPILER) -std=c++14
 RM=rm -f
-INCLUDES=includes/ -lwiringpi
 CPPFLAGS=-Wall -c -I $(INCLUDES)
-LDLIBS=-I $(INCLUDES)
+LDLIBS=-I $(INCLUDES) -I lib/wiringPi/wiringPi
 
 SRCS=src/*.cpp
 OBJS=$(subst .cc,.o,$(SRCS))
