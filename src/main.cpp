@@ -20,7 +20,9 @@ using std::cout;
 
 int main (int argc, char *argv[]) {
     int fd = wiringPiI2CSetup(0x04);
+    cout << "Starting..";
     for (int i = 0; i < 5; i++) {
         wiringPiI2CWrite(fd, i);
     }
+    cout << "Done...";
 }

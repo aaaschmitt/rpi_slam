@@ -4,7 +4,7 @@ ifeq ($(OS), Darwin)
 	INCLUDES=includes/
 else
 	COMPILER=g++-6
-	INCLUDES=includes/ -lwiringpi
+	INCLUDES=includes/ -lwiringPi
 endif
 
 CXX=$(COMPILER) -std=c++14

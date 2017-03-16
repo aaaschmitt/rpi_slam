@@ -1,3 +1,14 @@
+# Ignore all
+*
+
+# Unignore all with extensions
+!*.*
+
+# Unignore all dirs
+!*/
+
+### ABOVE KEEPS BINARY FILES OUT ###
+
 .DS_Store
 .depend
 arduino/Release/
