@@ -1,4 +1,5 @@
-CXX=g++-5 -std=c++14
+COMPILER=/Volumes/xtools/armv8-rpi3-linux-gnueabihf/bin/armv8-rpi3-linux-gnueabihf-g++
+CXX=$(COMPILER) -std=c++14
 RM=rm -f
 INCLUDES=includes/ -lwiringpi
 CPPFLAGS=-Wall -c -I $(INCLUDES)
